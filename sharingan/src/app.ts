@@ -2,8 +2,7 @@ import express, { Express } from 'express';
 import path from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
-import indexRouter from './routes/index';
-import aboutRouter from './routes/about';
+import apiRoutes from './api/routes';
 
 
 
@@ -17,8 +16,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Configure routes
-app.use('/', indexRouter);
-app.use('/about', aboutRouter);
+app.use('/api/v1', apiRoutes);
 
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);

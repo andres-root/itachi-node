@@ -7,4 +7,8 @@ router.get('/', (req: Request, res: Response) => {
   res.send('Hello, World!');
 });
 
+router.get('/', (req: Request, res: Response) => {
+  res.send({"data": "this is my data", "title": "About Page"});
+});
+
 export default router;
