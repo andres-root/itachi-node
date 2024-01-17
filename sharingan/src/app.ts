@@ -10,7 +10,7 @@ dbInit();
 
 const port = process.env.PORT || 3000;
 
-export const get = () => {
+export const getApp = () => {
   const app: Application = express();
 
   // Body parsing Middleware
@@ -30,7 +30,7 @@ export const get = () => {
 };
 
 export const start = () => {
-  const app = get();
+  const app = getApp();
   try {
     app.listen(port, () => {
       console.log(`Server running at http://localhost:${port}`);
