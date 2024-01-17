@@ -1,9 +1,8 @@
-import { Router } from 'express'
-import jobsRouter from './jobs'
+import { Router } from "express";
+import jobsRouter from "./jobs";
 
+const router = Router();
 
-const router = Router()
+router.use("/jobs", jobsRouter);
 
-router.use('/jobs', jobsRouter)
-
-export default router
+export default router;

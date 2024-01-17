@@ -1,6 +1,3 @@
-import Job from './job'
+import Job from "./job";
 
-
-export {
-  Job,
-}
+export { Job };

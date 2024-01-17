@@ -1,6 +1,5 @@
-import { DataTypes, Model, Optional } from 'sequelize'
-import sequelizeConnection from '../../config/db/db'
-
+import { DataTypes, Model, Optional } from "sequelize";
+import sequelizeConnection from "../../config/db/db";
 
 export interface JobAttributes {
   id: number;
@@ -12,9 +11,8 @@ export interface JobAttributes {
   updatedAt?: Date;
   deletedAt?: Date;
 }
-export interface JobInput extends Optional<JobAttributes, 'id' | 'title'> {}
+export interface JobInput extends Optional<JobAttributes, "id" | "title"> {}
 export interface JobOutput extends Required<JobAttributes> {}
-
 
 class Job extends Model<JobAttributes, JobInput> implements JobAttributes {
   public id!: number;
@@ -27,33 +25,36 @@ class Job extends Model<JobAttributes, JobInput> implements JobAttributes {
   public readonly deletedAt!: Date;
 }
 
-Job.init({
-  id: {
+Job.init(
+  {
+    id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
-      primaryKey: true
-  },
-  title: {
+      primaryKey: true,
+    },
+    title: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: 'not-specified'
-  },
-  description: {
+      defaultValue: "not-specified",
+    },
+    description: {
       type: DataTypes.TEXT,
-      allowNull: true
-  },
-  data: {
+      allowNull: true,
+    },
+    data: {
       type: DataTypes.TEXT,
-      allowNull: false
-  },
-  runAt: {
+      allowNull: false,
+    },
+    runAt: {
       type: DataTypes.DATE,
-      allowNull: false
-  }
-  }, {
-  sequelize: sequelizeConnection,
-  timestamps: true,
-  paranoid: true
-});
+      allowNull: false,
+    },
+  },
+  {
+    sequelize: sequelizeConnection,
+    timestamps: true,
+    paranoid: true,
+  },
+);
 
 export default Job;

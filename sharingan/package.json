@@ -28,12 +28,8 @@
     "@types/cookie-parser": "^1.4.6",
     "@types/morgan": "^1.9.9",
     "@types/sequelize": "^4.28.20",
-    "eslint": "^8.56.0",
-    "husky": "^8.0.3",
-    "lint-staged": "^15.2.0",
     "nodemon": "^3.0.2",
-    "pre-commit": "^1.2.2",
-    "prettier": "^3.2.2",
+    "prettier": "3.2.2",
     "sequelize-cli": "^6.6.2"
   },
   "repository": {
@@ -45,17 +41,5 @@
   "bugs": {
     "url": "https://github.com/andres-root/itachi-node/issues"
   },
-  "homepage": "https://github.com/andres-root/itachi-node#readme",
-  "husky": {
-      "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-      "*.js": [
-      "eslint — fix",
-      "prettier — write",
-      "git add"
-    ]
-  }
+  "homepage": "https://github.com/andres-root/itachi-node#readme"
 }

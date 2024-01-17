@@ -1,7 +1,6 @@
 {
-    "watch": ["src"],
-    "ext": "ts",
-    "ignore": ["src/**/*.spec.ts", "node_modules"],
-    "exec": "npm run build && node --unhandled-rejections=strict ./dist/app.js"
-  }
-  
+  "watch": ["src"],
+  "ext": "ts",
+  "ignore": ["src/**/*.spec.ts", "node_modules"],
+  "exec": "npm run build && node --unhandled-rejections=strict ./dist/app.js"
+}

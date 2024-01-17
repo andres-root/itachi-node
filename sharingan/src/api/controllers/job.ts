@@ -1,12 +1,11 @@
-import * as jobDal from '../models/dal/job'
-import { GetAllJobsFilter } from '../models/dal/types'
-import { JobInput, JobOutput, JobAttributes } from '../models/job'
-import { serializeJobOutput, JobInterface } from '../serializers/job'
-
+import * as jobDal from "../models/dal/job";
+import { GetAllJobsFilter } from "../models/dal/types";
+import { JobInput, JobOutput, JobAttributes } from "../models/job";
+import { serializeJobOutput, JobInterface } from "../serializers/job";
 
 export const createJobController = async (payload: JobAttributes): Promise<JobInterface> => {
-    return serializeJobOutput(await jobDal.createJob(payload))
-}
+  return serializeJobOutput(await jobDal.createJob(payload));
+};
 
 // export const update = (id: number, payload: Partial<JobInput>): Promise<JobOutput> => {
 //     return jobDal.updateJob(id, payload)
@@ -21,5 +20,5 @@ export const createJobController = async (payload: JobAttributes): Promise<JobIn
 // }
 
 export const getAllJobsController = async (filters: GetAllJobsFilter): Promise<JobInterface[]> => {
-    return (await jobDal.getAllJobs(filters)).map(serializeJobOutput)
-}
+  return (await jobDal.getAllJobs(filters)).map(serializeJobOutput);
+};

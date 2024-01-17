@@ -1,5 +1,4 @@
-import { JobOutput } from '../models/job';
-
+import { JobOutput } from "../models/job";
 
 export interface JobInterface {
   id: number;
@@ -21,6 +20,6 @@ export function serializeJobOutput(job: JobOutput): JobInterface {
     runAt: job.runAt.toISOString(),
     createdAt: job.createdAt?.toISOString(),
     updatedAt: job.updatedAt?.toISOString(),
-    deletedAt: job.deletedAt?.toISOString()
+    deletedAt: job.deletedAt?.toISOString(),
   };
 }

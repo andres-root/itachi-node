@@ -1,14 +1,14 @@
-import { Dialect, Sequelize } from 'sequelize'
+import { Dialect, Sequelize } from "sequelize";
 
-const dbName = 'postgres';
-const dbUser = 'postgres'
-const dbHost = 'db'
-const dbDriver = 'postgres';
-const dbPassword = 'postgres';
+const dbName = "postgres";
+const dbUser = "postgres";
+const dbHost = "db";
+const dbDriver = "postgres";
+const dbPassword = "postgres";
 
 const db = new Sequelize(dbName, dbUser, dbPassword, {
   host: dbHost,
-  dialect: dbDriver
-})
+  dialect: dbDriver,
+});
 
-export default db
+export default db;
