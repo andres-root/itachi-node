@@ -21,7 +21,7 @@ export const getApp = () => {
   app.use(express.static(path.join(__dirname, "public")));
 
   app.get("/", async (req: Request, res: Response): Promise<Response> => {
-    return res.status(200).send({ message: `Welcome to the cookbook API! \n Endpoints available at http://localhost:${port}/api/v1` });
+    return res.status(200).send({ message: `It works!` });
   });
 
   app.use("/api/v1", apiRoutes);

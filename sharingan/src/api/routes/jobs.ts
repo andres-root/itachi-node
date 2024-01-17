@@ -12,7 +12,7 @@ jobsRouter.get("/", (req: Request, res: Response) => {
 jobsRouter.post("/", async (req: Request, res: Response) => {
   const payload: JobAttributes = req.body;
   const result = await createJobController(payload);
-  res.send({ data: "this is my data", title: "About Page" });
+  res.send(result);
 });
 
 export default jobsRouter;
