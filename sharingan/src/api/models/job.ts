@@ -2,7 +2,7 @@ import { DataTypes, Model, Optional } from 'sequelize'
 import sequelizeConnection from '../../config/db/db'
 
 
-interface JobAttributes {
+export interface JobAttributes {
   id: number;
   title?: string;
   description?: string;
@@ -29,7 +29,7 @@ class Job extends Model<JobAttributes, JobInput> implements JobAttributes {
 
 Job.init({
   id: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true
   },

@@ -2,7 +2,7 @@ import { Dialect, Sequelize } from 'sequelize'
 
 const dbName = 'postgres';
 const dbUser = 'postgres'
-const dbHost = 'db:5432'
+const dbHost = 'db'
 const dbDriver = 'postgres';
 const dbPassword = 'postgres';
 

@@ -1,7 +1,18 @@
 import { JobOutput } from '../models/job';
 
 
-export function serializeJobOutput(job: JobOutput): any {
+export interface JobInterface {
+  id: number;
+  title?: string;
+  description?: string;
+  data: string;
+  runAt: string;
+  createdAt?: string;
+  updatedAt?: string;
+  deletedAt?: string;
+}
+
+export function serializeJobOutput(job: JobOutput): JobInterface {
   return {
     id: job.id,
     title: job.title,
