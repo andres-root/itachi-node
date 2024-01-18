@@ -27,13 +27,30 @@ services:
       - 5432:5432
     expose:
       - 5432
+  db_test:
+    image: postgres:16-alpine
+    restart: always
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - .db/postgresql/data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD", "pg_isready" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    ports:
+      - 5433:5432
+    expose:
+      - 5433
   sharingan:
     build:
       context: ./sharingan
       dockerfile: Dockerfile.dev
     volumes:
       - ./sharingan:/usr/src/app
-    environment:
-      NODE_ENV: development
+    env_file:
+      - ./sharingan/.env
     ports:
       - 3000:3000

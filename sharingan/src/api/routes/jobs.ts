@@ -1,12 +1,13 @@
 import express, { Request, Response } from "express";
 
-import { createJobController } from "../controllers/job";
+import { createJobController, getAllJobsController } from "../controllers/job";
 import { JobAttributes } from "../models/job";
 
 const jobsRouter = express.Router();
 
-jobsRouter.get("/", (req: Request, res: Response) => {
-  res.send({ data: "this is my data", title: "About Page" });
+jobsRouter.get("/", async (req: Request, res: Response) => {
+  const jobs = await getAllJobsController({});
+  res.send(jobs);
 });
 
 jobsRouter.post("/", async (req: Request, res: Response) => {

@@ -1,13 +1,24 @@
 import request from "supertest";
 
 import { getApp } from "../../app";
+import db from "../../config/db/db";
+import dbInit from "../../config/db/init";
+import Job, { JobOutput } from "../../api/models/job";
+import { JOB_ONE, JOB_TWO } from "./mocks/jobs";
 
 
-const app = getApp();
+describe('Job Model tests', () => {
+  beforeAll(async () => {
+    await db.sync({ force: true }); // This will use the test configuration
+  });
 
-describe("Test / ", () => {
-  test("Catch-all route", async () => {
-    const res = await request(app).get("/");
-    expect(res.body).toEqual({ message: "It works!" });
+  it('Should create a job', async () => {
+    const job = await Job.create(JOB_ONE);
+    expect(job.id).toEqual(1);
+    expect(job.title).toEqual(JOB_ONE.title);
+  });
+
+  afterAll(async () => {
+    await db.close();
   });
 });

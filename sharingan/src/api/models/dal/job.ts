@@ -1,11 +1,20 @@
-import { Op } from "sequelize";
 import { Job } from "..";
 import { JobInput, JobOutput } from "../job";
+import db from "../../../config/db/db";
 import { GetAllJobsFilter } from "./types";
 
 export const createJob = async (job: JobInput): Promise<JobOutput> => {
-  const newJob = await Job.create(job);
-  return newJob;
+  const transaction = await db.transaction();
+
+  try {
+    const newJob = await Job.create(job, {transaction});
+    await transaction.commit();
+
+    return newJob;
+  } catch (error) {
+    await transaction.rollback();
+    throw error;
+  }
 };
 
 export const updateJob = async (id: number, payload: Partial<JobInput>): Promise<JobOutput> => {
