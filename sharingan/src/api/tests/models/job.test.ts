@@ -1,11 +1,13 @@
-import request from "supertest";
+import db from "../../../config/db/db";
+import Job from "../../models/job";
+import { JOB_ONE, JOB_TWO } from "../mocks/jobs";
 
-import { getApp } from "../../app";
-import db from "../../config/db/db";
-import dbInit from "../../config/db/init";
-import Job, { JobOutput } from "../../api/models/job";
-import { JOB_ONE, JOB_TWO } from "./mocks/jobs";
 
+const dbTeardown = async () => {
+  await Job.sequelize?.query("SET FOREIGN_KEY_CHECKS = 0")
+  await Job.destroy({ cascade: true, truncate: true, force: true });
+  await Job.sequelize?.query("SET FOREIGN_KEY_CHECKS = 1")
+}
 
 describe('Job Model tests', () => {
   beforeAll(async () => {

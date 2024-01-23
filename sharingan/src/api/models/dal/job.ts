@@ -3,18 +3,19 @@ import { Op } from 'sequelize';
 import { Job } from "..";
 import { JobInput, JobOutput } from "../job";
 import db from "../../../config/db/db";
+import sequelize from 'sequelize';
 
 
 export const createJob = async (job: JobInput): Promise<JobOutput> => {
-  const transaction = await db.transaction();
-
   try {
-    const newJob = await Job.create(job, {transaction});
-    await transaction.commit();
+    const result = await db.transaction(async (transaction) => {
+      const newJob = await Job.create(job, {transaction});
+      return newJob;
+    });
 
-    return newJob;
+    return result;
   } catch (error) {
-    await transaction.rollback();
+    console.log("transactin rolled back");
     throw error;
   }
 };
@@ -31,7 +32,7 @@ export const updateJob = async (id: number, payload: Partial<JobInput>): Promise
 export const getJobById = async (id: number): Promise<JobOutput> => {
   const job = await Job.findByPk(id);
   if (!job) {
-    // @todo throw custom error
+    // TODO: throw custom error
     throw new Error("job not found");
   }
   return job;
@@ -45,5 +46,10 @@ export const deleteJobById = async (id: number): Promise<boolean> => {
 };
 
 export const getAllJobs = async (): Promise<JobOutput[]> => {
-  return await Job.findAll();
+  try {
+    return await Job.findAll();
+  } catch (error) {
+    console.error('error fetching jobs:', error);
+    throw error;
+  }
 };
