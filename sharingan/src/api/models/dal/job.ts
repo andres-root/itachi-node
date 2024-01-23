@@ -1,7 +1,9 @@
+import { Op } from 'sequelize';
+
 import { Job } from "..";
 import { JobInput, JobOutput } from "../job";
 import db from "../../../config/db/db";
-import { GetAllJobsFilter } from "./types";
+
 
 export const createJob = async (job: JobInput): Promise<JobOutput> => {
   const transaction = await db.transaction();
@@ -42,13 +44,6 @@ export const deleteJobById = async (id: number): Promise<boolean> => {
   return !!deletedJobCount;
 };
 
-export const getAllJobs = async (filter: GetAllJobsFilter): Promise<JobOutput[]> => {
-  const where = {
-    isDeleted: filter.includeDeleted ? undefined : false,
-    ...(filter.isDeleted !== undefined && { isDeleted: filter.isDeleted }),
-  };
-  const jobs = await Job.findAll({
-    where,
-  });
-  return jobs;
+export const getAllJobs = async (): Promise<JobOutput[]> => {
+  return await Job.findAll();
 };

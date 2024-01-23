@@ -6,7 +6,7 @@ import { JobAttributes } from "../models/job";
 const jobsRouter = express.Router();
 
 jobsRouter.get("/", async (req: Request, res: Response) => {
-  const jobs = await getAllJobsController({});
+  const jobs = await getAllJobsController();
   res.send(jobs);
 });
 

@@ -19,6 +19,6 @@ export const createJobController = async (payload: JobAttributes): Promise<JobIn
 //     return jobDal.deleteJobById(id)
 // }
 
-export const getAllJobsController = async (filters: GetAllJobsFilter): Promise<JobInterface[]> => {
-  return (await jobDal.getAllJobs(filters)).map(serializeJobOutput);
+export const getAllJobsController = async (): Promise<JobInterface[]> => {
+  return (await jobDal.getAllJobs()).map(serializeJobOutput);
 };

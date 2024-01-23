@@ -15,6 +15,7 @@ WORKDIR /usr/src/app
 
 # Copy the the source files into the image.
 COPY . .
+COPY .env .
 COPY package.json .
 COPY package-lock.json .
 # Install dependencies.
