@@ -21,28 +21,46 @@ export const createJob = async (job: JobInput): Promise<JobOutput> => {
 };
 
 export const updateJob = async (id: number, payload: Partial<JobInput>): Promise<JobOutput> => {
-  const job = await Job.findByPk(id);
-  if (!job) {
-    throw new Error("job not found");
+  try {
+    const result = await db.transaction(async (transaction) => {
+      const job = await Job.findByPk(id);
+      if (!job) {
+        throw new Error("job not found");
+      }
+      const updatedJob = await (job as Job).update(payload, {transaction});
+      return updatedJob;
+    });
+
+    return result;
+  } catch (error) {
+    console.log("transactin rolled back");
+    throw error;
   }
-  const updatedJob = await (job as Job).update(payload);
-  return updatedJob;
 };
 
 export const getJobById = async (id: number): Promise<JobOutput> => {
-  const job = await Job.findByPk(id);
-  if (!job) {
-    // TODO: throw custom error
-    throw new Error("job not found");
+  try {
+    const job = await Job.findByPk(id);
+    if (!job) {
+      throw new Error("job not found");
+    }
+    return job;
+  } catch (error) {
+    console.error('error fetching job:', error);
+    throw error;
   }
-  return job;
 };
 
 export const deleteJobById = async (id: number): Promise<boolean> => {
-  const deletedJobCount = await Job.destroy({
-    where: { id },
-  });
-  return !!deletedJobCount;
+  try {
+    const deletedJobCount = await Job.destroy({
+      where: { id },
+    });
+    return !!deletedJobCount;
+  } catch (error) {
+    console.error('error deleting job:', error);
+    throw error;
+  }
 };
 
 export const getAllJobs = async (): Promise<JobOutput[]> => {
