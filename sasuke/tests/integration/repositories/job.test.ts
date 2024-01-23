@@ -1,6 +1,7 @@
-import db from "../../src/adapters/output/db/db";
-import Job from "../../src/core/models/job";
-import { JOB_ONE, JOB_TWO } from "../mocks/jobs";
+import db from "../../../src/adapters/output/db/db";
+import Job from "../../../src/core/models/job";
+import { JOB_ONE, JOB_TWO } from "../../mocks/jobs";
+import { JobRepository } from "../../../src/adapters/output/repositories/job";
 
 
 const dbTeardown = async () => {
@@ -14,8 +15,9 @@ describe('Job Model tests', () => {
     await db.sync({ force: true }); // This will use the test configuration
   });
 
-  it('Should create a job', async () => {
-    const job = await Job.create(JOB_ONE);
+  it('Should create a job from repository', async () => {
+    const jobRepository = new JobRepository();
+    const job = await jobRepository.createJob(JOB_ONE);
     expect(job.id).toEqual(1);
     expect(job.title).toEqual(JOB_ONE.title);
   });

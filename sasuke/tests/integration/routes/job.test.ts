@@ -1,9 +1,9 @@
 import { agent as supertestRequest } from "supertest";
 
-import { getExpressApp } from "../../src/adapters/input/rest";
-import db from "../../src/adapters/output/db/db";
-import Job from "../../src/core/models/job";
-import { JOB_ONE, JOB_TWO } from "../mocks/jobs";
+import { getExpressApp } from "../../../src/adapters/input/rest";
+import db from "../../../src/adapters/output/db/db";
+import Job from "../../../src/core/models/job";
+import { JOB_ONE, JOB_TWO } from "../../mocks/jobs";
 
 
 const request = supertestRequest(getExpressApp());
